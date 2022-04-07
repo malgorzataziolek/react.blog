@@ -6,13 +6,14 @@ import { useNavigate } from 'react-router-dom';
 
 const AddPostForm = props => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const postId = props.postId;
 	const [title, setTitle] = useState('');
 	const [author, setAuthor] = useState('');
 	const [publishedDate, setPublishedDate] = useState('');
 	const [shortDescription, setDescription] = useState('');
 	const [content, setContent] = useState('');
-	const navigate = useNavigate();
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		dispatch(
@@ -77,8 +78,11 @@ const AddPostForm = props => {
 					rows={8}
 					onChange={e => setContent(e.target.value)}></Form.Control>
 			</Form.Group>
-			<Button variant='primary' type='submit' onClick={() => navigate('/')}>
+			<Button variant='primary' type='submit'>
 				Add post
+			</Button>
+			<Button variant='secondary' onClick={() => navigate('/')}>
+				Back to home
 			</Button>
 		</Form>
 	);
