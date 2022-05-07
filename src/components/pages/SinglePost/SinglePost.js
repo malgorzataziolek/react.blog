@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removePost } from '../../../redux/postsRedux';
+import dateToStr from '../../../utils/dateToStr';
 
 const SinglePost = () => {
 	const { id } = useParams();
@@ -47,10 +48,10 @@ const SinglePost = () => {
 					</h3>
 					<h4>
 						<span>Published: </span>
-						{postData.publishedDate}
+						{dateToStr(postData.publishedDate)}
 					</h4>
 					<br />
-					<p>{postData.content}</p>
+					<p dangerouslySetInnerHTML={{ __html: postData.content }}></p>
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton>
 							<Modal.Title>Are you sure?</Modal.Title>
