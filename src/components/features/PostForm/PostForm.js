@@ -6,6 +6,8 @@ import 'react-quill/dist/quill.snow.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
+import { getAllCategories } from '../../../redux/categoryReducer';
+import { useSelector } from 'react-redux';
 
 const PostForm = ({ action, actionText, ...props }) => {
 	const [title, setTitle] = useState(props.title || '');
@@ -14,6 +16,8 @@ const PostForm = ({ action, actionText, ...props }) => {
 	const [shortDescription, setDescription] = useState(
 		props.shortDescription || ''
 	);
+	const categories = useSelector(getAllCategories);
+	const [category, setCategory] = useState(props.category || '');
 
 	const {
 		register,
@@ -29,7 +33,14 @@ const PostForm = ({ action, actionText, ...props }) => {
 		setContentError(!content);
 		setDateError(!publishedDate);
 		if (content && publishedDate) {
-			action({ title, author, publishedDate, shortDescription, content });
+			action({
+				title,
+				author,
+				publishedDate,
+				shortDescription,
+				content,
+				category,
+			});
 		}
 	};
 	return (
@@ -86,6 +97,17 @@ const PostForm = ({ action, actionText, ...props }) => {
 						This field is required
 					</small>
 				)}
+			</Form.Group>
+			<Form.Group className='mb-3' controlId='FormCategory'>
+				<Form.Label>Category</Form.Label>
+				<Form.Select
+					value={category}
+					onChange={e => setCategory(e.target.value)}>
+					<option>Select category..</option>
+					{categories.map(category => (
+						<option key={category}>{category}</option>
+					))}
+				</Form.Select>
 			</Form.Group>
 			<Form.Group className='mb-3' controlId='formDescription'>
 				<Form.Label>Short Description</Form.Label>
@@ -166,5 +188,6 @@ PostForm.propTypes = {
 	publishedDate: PropTypes.string,
 	shortDescription: PropTypes.string,
 	content: PropTypes.string,
+	category: PropTypes.string,
 };
 export default PostForm;

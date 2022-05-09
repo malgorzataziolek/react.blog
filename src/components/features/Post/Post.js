@@ -28,6 +28,12 @@ const Post = () => {
 									<span>Published:</span>
 									{dateToStr(post.publishedDate)}
 								</Card.Subtitle>
+								<Card.Text className='mb-2'>
+									<b>Category: </b>
+									<span className='text-muted'>
+										{post.category ? post.category : 'not selected'}
+									</span>
+								</Card.Text>
 								<Card.Text className='mt-2'>{post.shortDescription}</Card.Text>
 								<Link className='mt-auto' to={'/post/' + post.id} key={post.id}>
 									<Button variant='primary'>Read more</Button>

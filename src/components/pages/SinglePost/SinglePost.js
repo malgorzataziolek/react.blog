@@ -51,6 +51,11 @@ const SinglePost = () => {
 						{dateToStr(postData.publishedDate)}
 					</h4>
 					<br />
+					<b>Category: </b>
+					<span className='text-muted'>
+						{postData.category ? postData.category : 'not selected'}
+					</span>
+					<br />
 					<p dangerouslySetInnerHTML={{ __html: postData.content }}></p>
 					<Modal show={show} onHide={handleClose}>
 						<Modal.Header closeButton>

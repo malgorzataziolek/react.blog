@@ -8,6 +8,8 @@ import Header from './components/views/Header/Header.js';
 import Footer from './components/views/Footer/Footer.js';
 import PostEdit from './components/pages/PostEdit/PostEdit.js';
 import SinglePost from './components/pages/SinglePost/SinglePost.js';
+import Categories from './components/pages/Categories/Categories.js';
+import SingleCategory from './components/pages/SingleCategory/SingleCategory.js';
 
 function App() {
 	return (
@@ -19,6 +21,8 @@ function App() {
 				<Route path='/post/add' element={<PostAdd />}></Route>
 				<Route path='/post/edit/:id' element={<PostEdit />}></Route>
 				<Route path='/about' element={<About />}></Route>
+				<Route path='/categories' element={<Categories />} />
+				<Route path='/category/:categoryName' element={<SingleCategory />} />
 				<Route path='*' element={<NotFound />}></Route>
 			</Routes>
 			<Footer />
